@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">FoodOrder</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="trueButton">OK</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="productName">Product Name</string>
+    <string name="deleteProduct">Remove</string>
+    <string name="quantity">Quantity : </string>
+</resources>

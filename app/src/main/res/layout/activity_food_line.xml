@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.foodorder.tatsuya.foodorder.activity.FoodLine">
+
+    <ImageView
+        android:id="@+id/imageProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_background"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ProductName"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/productPrice"
+            android:textColor="#428A0C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price" />
+        <ImageView
+            android:layout_marginRight="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvName"
+            android:id="@+id/productDescription"
+            android:src="@drawable/next"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <!--<TextView-->
+            <!--android:id="@+id/productDescription"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Description" />-->
+    </LinearLayout>
+</LinearLayout>

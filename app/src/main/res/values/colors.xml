@@ -8,4 +8,7 @@
     <color name="textHintRegister">#C0C0C0</color>
     <color name="button">#FEC426</color>
     <color name="buttontext">#886106</color>
+    <color name="textHintLogin">#B2464F</color>
+    <color name="textPrice">#428A0C</color>
+    <color name="textNameProduct">#0d0d0d</color>
 </resources>

@@ -54,9 +54,10 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted<
                 Account account = new Account();
                 account.setPassword(password);
                 account.setUsername(username);
-
-               new LoginTask(LoginActivity.this,
-                        LoginActivity.this).execute(account);
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+              // new LoginTask(LoginActivity.this,
+                        //LoginActivity.this).execute(account);
             }
         });
 

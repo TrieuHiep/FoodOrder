@@ -3,13 +3,14 @@ package com.foodorder.tatsuya.foodorder.model.personpkg;
 import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 
+import java.io.Serializable;
 import java.util.Hashtable;
 
 /**
  * Created by tatsuya on 07/04/2018.
  */
 
-public class Person implements KvmSerializable{
+public class Person implements KvmSerializable, Serializable{
     protected int id;
     protected Account account;
     protected int age;

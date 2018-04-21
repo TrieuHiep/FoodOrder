@@ -101,4 +101,13 @@ public class Account implements KvmSerializable, Serializable {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

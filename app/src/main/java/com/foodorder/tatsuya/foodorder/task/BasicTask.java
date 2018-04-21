@@ -24,12 +24,16 @@ public abstract class BasicTask<I, M, O> extends AsyncTask<I, M, O> {
     protected ConfigReader configReader; // read config.properties file
     protected OnTaskCompleted<O> listener;
 
-    protected BasicTask<I,M,O> basicTask;
 
     public BasicTask(Context context, OnTaskCompleted<O> listener) {
         this.listener = listener;
         this.configReader = ConfigReader.getInstance();
         this.NAMESPACE = configReader.getProperty(context, "name.space");
         this.HOST_NAME = configReader.getProperty(context, "host.name");
+    }
+
+    @Override
+    protected void onPostExecute(O o) {
+        this.listener.handle(o);
     }
 }

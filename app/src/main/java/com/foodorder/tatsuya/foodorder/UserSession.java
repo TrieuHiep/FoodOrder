@@ -28,8 +28,8 @@ public class UserSession {
     }
 
     public Account getLoggedAccount() {
-        return new Account(sharedPreferences.getString("username", null),
-                sharedPreferences.getString("password", null));
+        return new Account(sharedPreferences.getString("username", null ),
+                sharedPreferences.getString("password",null ));
     }
 
     private UserSession() {

@@ -67,14 +67,5 @@ public class FoodLoader extends BasicTask<Void, Food, List<Food>> {
         return foodList;
     }
 
-    @Override
-    protected void onPostExecute(List<Food> foodList) {
-        super.listener.handle(foodList);
-    }
-
-    @Override
-    protected void onProgressUpdate(Food... values) {
-        super.onProgressUpdate(values);
-    }
 }
 

@@ -67,15 +67,4 @@ public class AddToMeal extends BasicTask<Food, Void, Boolean> {
         return null;
     }
 
-    @Override
-    protected void onPostExecute(Boolean value) {
-        super.onPostExecute(value);
-        super.listener.handle(value);
-    }
-
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
-
 }

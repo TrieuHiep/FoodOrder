@@ -2,11 +2,13 @@ package com.foodorder.tatsuya.foodorder.model.orderpkg;
 
 import com.foodorder.tatsuya.foodorder.model.empkg.Employee;
 
+import java.io.Serializable;
+
 /**
  * Created by tatsuya on 07/04/2018.
  */
 
-public class Bill {
+public class Bill implements Serializable {
     private int ID;
     private FoodOrder foodOrder;
     private Employee employee;

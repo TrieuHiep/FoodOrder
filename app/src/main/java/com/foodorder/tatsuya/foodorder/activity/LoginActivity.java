@@ -64,10 +64,10 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted<
                 Account account = new Account();
                 account.setPassword(password);
                 account.setUsername(username);
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
-              // new LoginTask(LoginActivity.this,
-                        //LoginActivity.this).execute(account);
+//                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(i);
+               new LoginTask(LoginActivity.this,
+                        LoginActivity.this).execute(account);
             }
         });
 
@@ -94,10 +94,12 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted<
     @Override
     public void handle(Boolean value) {
         if (value) {
+            System.out.println("GO TO HANDLE.......");
             Toast.makeText(LoginActivity.this, "Login successfully!", Toast.LENGTH_SHORT).show();
             String username = edtUsername.getText().toString();
             String password = edtPassword.getText().toString();
             Account account = new Account(username,password);
+            System.out.println(account);
             UserSession.getInstance().putAccount(this,account);
 
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

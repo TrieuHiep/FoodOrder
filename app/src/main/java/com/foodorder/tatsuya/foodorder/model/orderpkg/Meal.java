@@ -3,11 +3,13 @@ package com.foodorder.tatsuya.foodorder.model.orderpkg;
 import com.foodorder.tatsuya.foodorder.model.ctmpkg.Customer;
 import com.foodorder.tatsuya.foodorder.model.foodpkg.Food;
 
+import java.io.Serializable;
+
 /**
  * Created by tatsuya on 07/04/2018.
  */
 
-public class Meal {
+public class Meal implements Serializable {
     private int ID;
     private Customer customer;
     private Food food;

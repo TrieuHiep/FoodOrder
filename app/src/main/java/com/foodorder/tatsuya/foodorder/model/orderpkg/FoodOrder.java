@@ -1,10 +1,12 @@
 package com.foodorder.tatsuya.foodorder.model.orderpkg;
 
+import java.io.Serializable;
+
 /**
  * Created by tatsuya on 07/04/2018.
  */
 
-public class FoodOrder {
+public class FoodOrder implements Serializable{
     private int ID;
     private Meal meal;
     private String creationDate;

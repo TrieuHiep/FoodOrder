@@ -3,7 +3,9 @@ package com.foodorder.tatsuya.foodorder.task;
 import android.content.Context;
 import android.util.Log;
 
+import com.foodorder.tatsuya.foodorder.model.foodpkg.Food;
 import com.foodorder.tatsuya.foodorder.model.orderpkg.FoodOrder;
+import com.foodorder.tatsuya.foodorder.model.orderpkg.Meal;
 import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
 
 import org.ksoap2.SoapEnvelope;
@@ -20,10 +22,18 @@ import java.util.Vector;
  * Created by tatsuya on 17/04/2018.
  */
 
-public class OrderGetter extends BasicTask<Account, Void, List<FoodOrder>> {
+public class OrderGetter extends BasicTask<Account, FoodOrder, List<FoodOrder>> {
 
     public OrderGetter(Context context, OnTaskCompleted<List<FoodOrder>> listener) {
         super(context, listener);
+        super.URL = super.HOST_NAME + "/foodorderws/foodorderws?WSDL";
+        super.METHOD_NAME = "getOrders";
+        super.SOAP_ACTION = super.NAMESPACE + super.METHOD_NAME;
+    }
+
+    @Override
+    protected void onProgressUpdate(FoodOrder... values) {
+        super.onProgressUpdate(values);
     }
 
     @Override
@@ -50,41 +60,51 @@ public class OrderGetter extends BasicTask<Account, Void, List<FoodOrder>> {
             if (o instanceof SoapObject) {
                 SoapObject object = (SoapObject) o;
                 FoodOrder order = new FoodOrder();
-//                order.setId(Integer.parseInt(object.getProperty("id").toString()));
+                order.setID(Integer.parseInt(object.getProperty("id").toString()));
+                Log.i("fuck you1", "bitch");
+                order.setStatus(object.getProperty("status").toString());
+                Log.i("fuck you2", "bitch");
+
 //                order.setProductName(object.getProperty("productName").toString());
 //                order.setPrice(Long.parseLong(object.getProperty("price").toString()));
 //                order.setQuantity(Integer.parseInt(object.getProperty("quantity").toString()));
 //                order.setImageURL(object.getProperty("imageURL").toString());
                 foodOrderList.add(order);
             } else if (o instanceof Vector) {
+                Log.i("fuck you3", "bitch");
                 Vector<SoapObject> result = (Vector<SoapObject>) o;
                 int length = result.size();
                 for (int i = 0; i < length; ++i) {
+                    Log.i("fuck you4", "bitch");
                     SoapObject object = result.get(i);
-                    FoodOrder food = new FoodOrder();
-//                    food.setId(Integer.parseInt(object.getProperty("id").toString()));
-//                    food.setProductName(object.getProperty("productName").toString());
-//                    food.setPrice(Long.parseLong(object.getProperty("price").toString()));
-//                    food.setQuantity(Integer.parseInt(object.getProperty("quantity").toString()));
-//                    food.setImageURL(object.getProperty("imageURL").toString());
-                    foodOrderList.add(food);
+                    System.out.println("object: "+object.toString());
+                    FoodOrder order = new FoodOrder();
+                    order.setID(Integer.parseInt(object.getProperty("id").toString()));
+                    System.out.println("id:"+Integer.parseInt(object.getProperty("id").toString()));
+
+                    order.setStatus(object.getProperty("status").toString());
+                    Object k = object.getProperty("mealID").toString();
+                    System.out.println(i);
+//                    Meal meal = new Meal();
+//              //      String productName = object.getProperty("productName").toString();
+//                    String imageUrl = object.getProperty("imageURL").toString();
+//                    Food food = new Food();
+//                   // food.setProductName(productName);
+//                    food.setImageURL(imageUrl);
+//                    meal.setFood(food);
+//                    order.setMeal(meal);
+                    foodOrderList.add(order);
+                    Log.i("fuck you5", "bitch");
+
                 }
+
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return foodOrderList;
     }
 
-
-    @Override
-    protected void onPostExecute(List<FoodOrder> foodOrders) {
-        super.onPostExecute(foodOrders);
-    }
-
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
 }

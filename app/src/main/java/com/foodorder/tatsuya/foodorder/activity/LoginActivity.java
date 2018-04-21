@@ -9,6 +9,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.foodorder.tatsuya.foodorder.R;
 import com.foodorder.tatsuya.foodorder.UserSession;
 import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
@@ -18,23 +25,26 @@ import com.foodorder.tatsuya.foodorder.task.OnTaskCompleted;
 public class LoginActivity extends AppCompatActivity implements OnTaskCompleted<Boolean> {
 
     private Button btnLogin;
-    private TextView tvRegister, tvFacebook;
+    private TextView tvRegister;
     private EditText edtUsername, edtPassword;
-
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         init();
     }
 
     private void init() {
+        callbackManager = CallbackManager.Factory.create();
         tvRegister = findViewById(R.id.tvRegister);
         btnLogin = findViewById(R.id.btnLogin);
         edtUsername = findViewById(R.id.edtUsername);
         edtPassword = findViewById(R.id.edtPassword);
-        tvFacebook = findViewById(R.id.tv_facebook);
+        loginButton = findViewById(R.id.login_button);
 
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +71,20 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted<
             }
         });
 
-        tvFacebook.setOnClickListener(new View.OnClickListener() {
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onClick(View view) {
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(LoginActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -84,5 +105,10 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted<
         } else {
             Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
         }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

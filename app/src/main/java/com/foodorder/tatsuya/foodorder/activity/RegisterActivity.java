@@ -7,10 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foodorder.tatsuya.foodorder.R;
+import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
+import com.foodorder.tatsuya.foodorder.model.personpkg.Person;
+import com.foodorder.tatsuya.foodorder.task.OnTaskCompleted;
+import com.foodorder.tatsuya.foodorder.task.RegistrationTask;
+import com.foodorder.tatsuya.foodorder.utils.EndPoint;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements OnTaskCompleted<Boolean> {
     private Button btnRegsiter;
     private EditText edtName, edtAge, edtEmail, edtUsername, edtPassword;
     private TextView tvMyPerInfo, tvAccountInfo;
@@ -24,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
-
     private void init() {
         edtName = findViewById(R.id.edt_name);
         edtAge = findViewById(R.id.edt_age);
@@ -40,12 +45,36 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = edtEmail.getText().toString();
                 String username = edtUsername.getText().toString();
                 String password = edtPassword.getText().toString();
+                Account account = new Account();
+                account.setUsername(username);
+                account.setPassword(password);
+                Person person = new Person();
+                person.setAge(age);
+                person.setFullName(name);
+                person.setAccount(account);
+                System.out.println(email);
+                System.out.println(person);
 
-                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+
+               new RegistrationTask(RegisterActivity.this, new EndPoint<>(), person, email).execute(person);
+
+                /*Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(i);
-                finish();
+                finish();*/
             }
         });
+    }
+
+    @Override
+    public void handle(Boolean value) {
+        if (value.equals(true)) {
+            Toast.makeText(RegisterActivity.this, "Login successfully!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            super.startActivity(intent);
+        } else {
+            Toast.makeText(RegisterActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 }

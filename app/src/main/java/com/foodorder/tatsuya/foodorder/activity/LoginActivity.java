@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted<
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, null);
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(i);
             }
         });

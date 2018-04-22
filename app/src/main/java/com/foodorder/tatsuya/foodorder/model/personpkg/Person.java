@@ -88,6 +88,15 @@ public class Person implements KvmSerializable{
     }
 
     @Override
+    public String toString() {
+        return "Person{" +
+                " account=" + account +
+                ", age=" + age +
+                ", fullName='" + fullName + '\'' +
+                '}';
+    }
+
+    @Override
     public void setProperty(int i, Object o) {
         switch (i) {
             case 0: {

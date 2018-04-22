@@ -17,6 +17,7 @@ public class Account implements KvmSerializable, Serializable {
     private String password;
 
     public Account() {
+
     }
 
     public Account(String username, String password) {
@@ -46,6 +47,14 @@ public class Account implements KvmSerializable, Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     @Override

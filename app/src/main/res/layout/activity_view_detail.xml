@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout tools:context=".ViewDetailActivity"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/tv_name"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="40sp"
+        android:text="Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:id="@+id/img_food"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_width="150dp"
+        android:layout_gravity="center"
+        android:layout_height="150dp" />
+    <Button
+        android:background="@color/button"
+        android:text="ADD TO MEAL"
+        android:textColor="@color/buttontext"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout tools:context=".PaymentActivity"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+
+        android:textSize="24dp"
+        android:gravity="center"
+        android:text="Choose payment type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:layout_marginTop="40dp"
+        android:id="@+id/radio_typepay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+
+            android:text="Thanh toan khi nhan hang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:text="Thanh toan qua the ATM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:text="Thanh toan qua VISA Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_createorder"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:text="Create Order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

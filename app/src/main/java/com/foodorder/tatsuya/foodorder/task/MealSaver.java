@@ -74,7 +74,8 @@ public class MealSaver extends BasicTask<Account, Void, Boolean> {
     }
 
     @Override
-    protected void onPostExecute(Boolean aBoolean) {
-        super.listener.handle(aBoolean);
+    protected void onPostExecute(Boolean o) {
+        super.onPostExecute(o);
+        this.listener.handle(o);
     }
 }

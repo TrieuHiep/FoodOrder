@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#14ce68</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="textLogin">#E78740</color>
@@ -8,4 +8,6 @@
     <color name="textHintRegister">#C0C0C0</color>
     <color name="button">#FEC426</color>
     <color name="buttontext">#886106</color>
+    <color name="textPrice">#428A0C</color>
+    <color name="textNameProduct">#0d0d0d</color>
 </resources>

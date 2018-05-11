@@ -9,6 +9,7 @@
     android:paddingTop="16dp"
     tools:context="com.foodorder.tatsuya.foodorder.activity.MealLineActivity">
 
+
     <ImageView
         android:id="@+id/imageProduct"
         android:layout_width="150dp"
@@ -39,15 +40,30 @@
             android:gravity="center"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/quantity" />
-
+                android:padding="3dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/rectangle_border"
+                android:drawableLeft="@drawable/ic_add_24dp"
+                android:id="@+id/plus_quantity"/>
             <TextView
-                android:id="@+id/numOfQuantity"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="x 1"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/numOfQuantity"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_margin="3dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/rectangle_border"
+                android:drawableLeft="@drawable/ic_remove_black"
+                android:id="@+id/minus_quantity"/>
         </LinearLayout>
 
         <LinearLayout
@@ -55,9 +71,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="25dp">
+            android:paddingTop="20dp">
 
             <Button
+                android:background="@drawable/border_button"
                 android:id="@+id/deleteBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

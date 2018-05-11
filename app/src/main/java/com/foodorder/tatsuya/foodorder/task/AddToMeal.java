@@ -3,7 +3,7 @@ package com.foodorder.tatsuya.foodorder.task;
 import android.content.Context;
 import android.util.Log;
 
-import com.foodorder.tatsuya.foodorder.UserSession;
+import com.foodorder.tatsuya.foodorder.utils.UserSession;
 import com.foodorder.tatsuya.foodorder.model.foodpkg.Food;
 import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
 
@@ -66,16 +66,4 @@ public class AddToMeal extends BasicTask<Food, Void, Boolean> {
         }
         return null;
     }
-
-    @Override
-    protected void onPostExecute(Boolean value) {
-        super.onPostExecute(value);
-        super.listener.handle(value);
-    }
-
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
-
 }

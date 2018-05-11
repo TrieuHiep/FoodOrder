@@ -8,7 +8,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.foodorder.tatsuya.foodorder.R;
-import com.foodorder.tatsuya.foodorder.UserSession;
+import com.foodorder.tatsuya.foodorder.task.QuantityUpdater;
+import com.foodorder.tatsuya.foodorder.utils.EndPoint;
+import com.foodorder.tatsuya.foodorder.utils.UserSession;
 import com.foodorder.tatsuya.foodorder.adapter.MealAdapter;
 import com.foodorder.tatsuya.foodorder.model.foodpkg.Food;
 import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
@@ -43,8 +45,12 @@ public class ViewMyMealActivity extends AppCompatActivity implements OnTaskCompl
                 amount += food.getPrice();
             }
             System.out.println("Amount = " + amount);
-            amount = amount / 1000;
+            amount = amount / 10000;
             super.finish();
+            for (Food food : foodList) {
+                new QuantityUpdater(this, new EndPoint<>(), food)
+                        .execute(loggedAccount);
+            }
             startActivity(new Intent(ViewMyMealActivity.this, OrderConfirmation.class)
                     .putExtra("amount", amount)
             );

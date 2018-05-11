@@ -2,8 +2,6 @@ package com.foodorder.tatsuya.foodorder.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,14 +14,17 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.foodorder.tatsuya.foodorder.R;
-import com.foodorder.tatsuya.foodorder.UserSession;
+import com.foodorder.tatsuya.foodorder.task.SearchTask;
+import com.foodorder.tatsuya.foodorder.task.factory.FoodFactoryTask;
+import com.foodorder.tatsuya.foodorder.utils.UserSession;
 import com.foodorder.tatsuya.foodorder.adapter.FoodAdapter;
 import com.foodorder.tatsuya.foodorder.model.foodpkg.Food;
 import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
 import com.foodorder.tatsuya.foodorder.task.BasicTask;
-import com.foodorder.tatsuya.foodorder.task.FoodLoader;
+import com.foodorder.tatsuya.foodorder.task.factory.FoodLoader;
 import com.foodorder.tatsuya.foodorder.task.OnTaskCompleted;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnTaskCompleted<List<Food>> {
 
     private GridView gridViewProduct;
-    private ImageView cartImage;
+//    private ImageView cartImage;
     private List<Food> foodList = new ArrayList<>();
 
     @Override
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         System.out.println(loggedAccount.getPassword());
 
         this.gridViewProduct = super.findViewById(R.id.gridViewProduct);
-        this.cartImage = super.findViewById(R.id.cartImage);
+//        this.cartImage = super.findViewById(R.id.cartImage);
 
         BasicTask<Void, Food, List<Food>> basicTask =
                 new FoodLoader(MainActivity.this, MainActivity.this);
@@ -86,10 +87,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        this.cartImage.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, ViewMyMealActivity.class);
-            super.startActivity(intent);
-        });
+//        this.cartImage.setOnClickListener(view -> {
+//            Intent intent = new Intent(MainActivity.this, ViewMyMealActivity.class);
+//            super.startActivity(intent);
+//        });
     }
 
     @Override
@@ -106,6 +107,24 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem menuItem = menu.findItem(R.id.searchMenu);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                searchView.clearFocus();
+                if (s != null){
+                    new SearchTask(MainActivity.this, MainActivity.this)
+                            .execute(s);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
         return true;
     }
 
@@ -117,8 +136,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        if(id == R.id.cartImage){
+            Intent intent = new Intent(MainActivity.this, ViewMyMealActivity.class);
+            super.startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -132,9 +155,25 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_orderTracking) {
             // Handle the camera action
+            super.startActivity(new Intent(MainActivity.this, OrderTrackingActivity.class));
         } else if (id == R.id.nav_logout) {
             UserSession.getInstance().putAccount(this, new Account());
-            super.finish();
+            Intent intent = new Intent(super.getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
+        } else if (id == R.id.nav_Hamburger) {
+            new FoodFactoryTask()
+                    .getTask(this, this, "Hamburger")
+                    .execute();
+        } else if (id == R.id.nav_Chicken) {
+            new FoodFactoryTask()
+                    .getTask(this, this, "Chicken")
+                    .execute();
+        } else if (id == R.id.nav_Rice) {
+            new FoodFactoryTask()
+                    .getTask(this, this, "Rice")
+                    .execute();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

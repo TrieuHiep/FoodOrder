@@ -25,6 +25,12 @@ public class Person implements KvmSerializable{
         this.fullName = fullName;
     }
 
+    public Person(Account account, int age, String fullName) {
+        this.account = account;
+        this.age = age;
+        this.fullName = fullName;
+    }
+
     public int getID() {
         return id;
     }

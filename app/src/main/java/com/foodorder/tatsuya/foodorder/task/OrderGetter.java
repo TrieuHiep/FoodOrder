@@ -3,7 +3,9 @@ package com.foodorder.tatsuya.foodorder.task;
 import android.content.Context;
 import android.util.Log;
 
+import com.foodorder.tatsuya.foodorder.model.foodpkg.Food;
 import com.foodorder.tatsuya.foodorder.model.orderpkg.FoodOrder;
+import com.foodorder.tatsuya.foodorder.model.orderpkg.Meal;
 import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
 
 import org.ksoap2.SoapEnvelope;
@@ -24,6 +26,9 @@ public class OrderGetter extends BasicTask<Account, Void, List<FoodOrder>> {
 
     public OrderGetter(Context context, OnTaskCompleted<List<FoodOrder>> listener) {
         super(context, listener);
+        super.URL = super.HOST_NAME + "/foodorderws/foodorderws?WSDL";
+        super.METHOD_NAME = "getOrders";
+        super.SOAP_ACTION = this.NAMESPACE + this.METHOD_NAME;
     }
 
     @Override
@@ -48,26 +53,55 @@ public class OrderGetter extends BasicTask<Account, Void, List<FoodOrder>> {
             Log.i("fuck you", "bitch");
             Object o = envelope.getResponse();
             if (o instanceof SoapObject) {
-                SoapObject object = (SoapObject) o;
+                SoapObject orderObject = (SoapObject) o;
                 FoodOrder order = new FoodOrder();
-//                order.setId(Integer.parseInt(object.getProperty("id").toString()));
-//                order.setProductName(object.getProperty("productName").toString());
-//                order.setPrice(Long.parseLong(object.getProperty("price").toString()));
-//                order.setQuantity(Integer.parseInt(object.getProperty("quantity").toString()));
-//                order.setImageURL(object.getProperty("imageURL").toString());
-                foodOrderList.add(order);
+                SoapObject mealObject = (SoapObject) orderObject.getProperty("mealID");
+                SoapObject foodObject = (SoapObject) mealObject.getProperty("foodID");
+
+                Food food = new Food();
+                food.setId(Integer.parseInt(foodObject.getProperty("id").toString()));
+                food.setProductName(foodObject.getProperty("productName").toString());
+                food.setPrice(Long.parseLong(foodObject.getProperty("price").toString()));
+                food.setQuantity(Integer.parseInt(foodObject.getProperty("quantity").toString()));
+                food.setImageURL(foodObject.getProperty("imageURL").toString());
+
+                Meal meal = new Meal();
+                meal.setFood(food);
+
+                FoodOrder foodOrder = new FoodOrder();
+                foodOrder.setID(Integer.valueOf(orderObject.getProperty("id").toString()));
+                foodOrder.setMeal(meal);
+                foodOrder.setStatus(orderObject.getProperty("status").toString());
+                foodOrderList.add(foodOrder);
             } else if (o instanceof Vector) {
+                System.out.println("GETTING LIST OF ORDER........");
                 Vector<SoapObject> result = (Vector<SoapObject>) o;
                 int length = result.size();
+                System.out.println("NUM OF ORDER = "+ length);
                 for (int i = 0; i < length; ++i) {
-                    SoapObject object = result.get(i);
-                    FoodOrder food = new FoodOrder();
-//                    food.setId(Integer.parseInt(object.getProperty("id").toString()));
-//                    food.setProductName(object.getProperty("productName").toString());
-//                    food.setPrice(Long.parseLong(object.getProperty("price").toString()));
-//                    food.setQuantity(Integer.parseInt(object.getProperty("quantity").toString()));
-//                    food.setImageURL(object.getProperty("imageURL").toString());
-                    foodOrderList.add(food);
+                    System.out.println("i = "+i);
+                    SoapObject orderObject = result.get(i);
+                    System.out.println(orderObject.toString());
+                    SoapObject mealObject = (SoapObject) orderObject.getProperty("mealID");
+                    SoapObject foodObject = (SoapObject) mealObject.getProperty("foodID");
+
+                    Food food = new Food();
+                    food.setId(Integer.parseInt(foodObject.getProperty("id").toString()));
+                    food.setProductName(foodObject.getProperty("productName").toString());
+                    food.setPrice(Long.parseLong(foodObject.getProperty("price").toString()));
+                    food.setQuantity(Integer.parseInt(foodObject.getProperty("quantity").toString()));
+                    food.setImageURL(foodObject.getProperty("imageURL").toString());
+                    System.out.println("GETTING IMG = " + foodObject.getProperty("imageURL").toString());
+
+                    Meal meal = new Meal();
+                    meal.setFood(food);
+
+                    FoodOrder foodOrder = new FoodOrder();
+                    foodOrder.setID(Integer.valueOf(orderObject.getProperty("id").toString()));
+                    foodOrder.setMeal(meal);
+                    foodOrder.setStatus(orderObject.getProperty("status").toString());
+
+                    foodOrderList.add(foodOrder);
                 }
             }
 
@@ -75,16 +109,5 @@ public class OrderGetter extends BasicTask<Account, Void, List<FoodOrder>> {
             e.printStackTrace();
         }
         return foodOrderList;
-    }
-
-
-    @Override
-    protected void onPostExecute(List<FoodOrder> foodOrders) {
-        super.onPostExecute(foodOrders);
-    }
-
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
     }
 }

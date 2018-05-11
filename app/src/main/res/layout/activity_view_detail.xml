@@ -4,72 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.foodorder.tatsuya.foodorder.activity.ViewDetail">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="10dp">
-
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp" />
-
-        <!--<TextView-->
-            <!--android:id="@+id/hihiTextView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btnAddToMeal"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Add to Meal" />-->
-
-        <Button
-            android:id="@+id/btnAddToMeal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/button"
-            android:text="ADD TO MEAL"
-            android:textColor="@color/buttontext" />
-    </LinearLayout>
-
-
 
     <TextView
         android:id="@+id/tv_name"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:textSize="40sp"
-        android:text="Name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <ImageView
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Name"
+        android:textSize="40sp" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/hihiTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:text="Price"
+            android:textColor="@color/textPrice"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text=" VND"
+            android:textColor="@color/textPrice"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+    <ImageView
         android:id="@+id/img_food"
-        android:src="@drawable/ic_launcher_background"
         android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_height="150dp" />
-    <TextView
-        android:id="@+id/hihiTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_launcher_background" />
+
     <Button
-        android:background="@color/button"
-        android:text="ADD TO MEAL"
-        android:textColor="@color/buttontext"
+        android:id="@+id/btnAddToMeal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:background="@drawable/border_button"
+        android:text="ADD TO MEAL"
+        android:textColor="@color/buttontext" />
 
+
+        <Button
+            android:layout_margin="14dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/btn_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_bt_share"
+            android:text="Share with Facebook" />
 
 
 </LinearLayout>

@@ -13,4 +13,6 @@
     <string name="productName">Product Name</string>
     <string name="deleteProduct">Remove</string>
     <string name="quantity">Quantity : </string>
+    <string name="facebook_app_id">232191390849489</string>
+    <string name="fb_login_protocol_scheme">fb232191390849489</string>
 </resources>

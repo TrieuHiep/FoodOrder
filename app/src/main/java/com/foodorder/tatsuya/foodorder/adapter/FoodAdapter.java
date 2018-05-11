@@ -42,7 +42,6 @@ public class FoodAdapter extends ArrayAdapter<Food> {
             viewHolder.setImageFood((ImageView) convertView.findViewById(R.id.imageProduct));
             viewHolder.setProductName((TextView) convertView.findViewById(R.id.productName));
             viewHolder.setPriceProduct((TextView) convertView.findViewById(R.id.productPrice));
-            viewHolder.setProductDescription((ImageView) convertView.findViewById(R.id.productDescription));
             convertView.setTag(viewHolder);
         }
         else{

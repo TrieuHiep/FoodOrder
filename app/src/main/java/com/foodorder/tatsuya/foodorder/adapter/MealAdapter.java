@@ -13,7 +13,11 @@ import android.widget.TextView;
 
 import com.foodorder.tatsuya.foodorder.R;
 import com.foodorder.tatsuya.foodorder.model.foodpkg.Food;
+import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
 import com.foodorder.tatsuya.foodorder.task.ImageRenderOnline;
+import com.foodorder.tatsuya.foodorder.task.RemoveItemTask;
+import com.foodorder.tatsuya.foodorder.utils.EndPoint;
+import com.foodorder.tatsuya.foodorder.utils.UserSession;
 
 import java.util.List;
 
@@ -43,6 +47,8 @@ public class MealAdapter extends ArrayAdapter<Food> {
         TextView priceProduct = convertView.findViewById(R.id.productPrice);
         TextView numOfQuantity = convertView.findViewById(R.id.numOfQuantity);
         Button btnRemove = convertView.findViewById(R.id.deleteBtn);
+        TextView plusQuantity = convertView.findViewById(R.id.plus_quantity);
+        TextView subQuantity = convertView.findViewById(R.id.minus_quantity);
 
         Food food = this.foodList.get(position);
         System.out.println(food.getImageURL());
@@ -51,8 +57,27 @@ public class MealAdapter extends ArrayAdapter<Food> {
         productName.setText(food.getProductName());
         priceProduct.setText(Double.valueOf(food.getPrice()).toString());
         numOfQuantity.setText(Integer.valueOf(food.getQuantity()).toString());
-        btnRemove.setOnClickListener(view -> {
 
+        plusQuantity.setOnClickListener(view -> {
+            int newQuantity = Math.min(20,
+                    Integer.parseInt(numOfQuantity.getText().toString().trim()) + 1);
+            numOfQuantity.setText(newQuantity + "");
+            food.setQuantity(newQuantity);
+        });
+
+        subQuantity.setOnClickListener(view -> {
+            int newQuantity = Math.max(1,
+                    Integer.parseInt(numOfQuantity.getText().toString().trim()) - 1);
+            System.out.println("decrease quantity...");
+            numOfQuantity.setText(newQuantity + "");
+            food.setQuantity(newQuantity);
+        });
+
+        btnRemove.setOnClickListener(view -> {
+            Account loggedAccount = UserSession.getInstance().getLoggedAccount();
+            new RemoveItemTask(context,new EndPoint<>(),loggedAccount,position).execute();
+            foodList.remove(position);
+            MealAdapter.this.notifyDataSetChanged(); //Updates adapter to new changes
         });
         return convertView;
     }

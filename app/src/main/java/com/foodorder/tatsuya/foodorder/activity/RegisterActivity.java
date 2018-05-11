@@ -7,13 +7,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foodorder.tatsuya.foodorder.R;
+import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
+import com.foodorder.tatsuya.foodorder.model.personpkg.Person;
+import com.foodorder.tatsuya.foodorder.task.OnTaskCompleted;
+import com.foodorder.tatsuya.foodorder.task.RegistrationTask;
+import com.foodorder.tatsuya.foodorder.utils.EndPoint;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity
+        implements OnTaskCompleted<Boolean> {
     private Button btnRegsiter;
     private EditText edtName, edtAge, edtEmail, edtUsername, edtPassword;
-    private TextView tvMyPerInfo, tvAccountInfo;
 
 
     @Override
@@ -21,8 +27,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         init();
-
-
     }
 
     private void init() {
@@ -41,11 +45,22 @@ public class RegisterActivity extends AppCompatActivity {
                 String username = edtUsername.getText().toString();
                 String password = edtPassword.getText().toString();
 
-                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
+                Person person = new Person(new Account(username,password),age,name);
+                new RegistrationTask(RegisterActivity.this, RegisterActivity.this, person, email)
+                        .execute();
             }
         });
 
+    }
+
+    @Override
+    public void handle(Boolean value) {
+        if (value) {
+            Toast.makeText(this, "Successfully", Toast.LENGTH_SHORT).show();
+            super.finish();
+        }
+        else{
+            Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

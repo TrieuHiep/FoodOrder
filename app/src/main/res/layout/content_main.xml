@@ -9,14 +9,13 @@
     tools:context="com.foodorder.tatsuya.foodorder.activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
-    <ImageView
-        android:id="@+id/cartImage"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/meal"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+    <!--<ImageView-->
+        <!--android:id="@+id/cartImageX"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:src="@drawable/meal"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp" />-->
     <GridView
         android:id="@+id/gridViewProduct"
         android:layout_width="wrap_content"

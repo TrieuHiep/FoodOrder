@@ -3,7 +3,7 @@ package com.foodorder.tatsuya.foodorder.task;
 import android.content.Context;
 import android.util.Log;
 
-import com.foodorder.tatsuya.foodorder.UserSession;
+import com.foodorder.tatsuya.foodorder.utils.UserSession;
 import com.foodorder.tatsuya.foodorder.model.foodpkg.Food;
 import com.foodorder.tatsuya.foodorder.model.personpkg.Account;
 
@@ -90,16 +90,5 @@ public class GetMyMeal extends BasicTask<Void, Food, List<Food>> {
             e.printStackTrace();
         }
         return foodList;
-    }
-
-    @Override
-    protected void onPostExecute(List<Food> foodList) {
-//        super.onPostExecute(foodList);
-        super.listener.handle(foodList);
-    }
-
-    @Override
-    protected void onProgressUpdate(Food... values) {
-        super.onProgressUpdate(values);
     }
 }

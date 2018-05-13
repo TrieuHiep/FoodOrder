@@ -95,34 +95,36 @@
 
         <TextView
             android:textColor="@color/textLogin"
-            android:id="@+id/tvForget"
+            android:id="@+id/tvRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Don't have account?" />
-
-        <TextView
-            android:textColor="@color/textLogin"
-            android:id="@+id/tvRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvForget"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="20dp"
             android:text="Register now!" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/tv_facebook"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_below="@+id/tvForget"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_marginRight="15dp"-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:text="Log in with Facebook!" />-->
+        <Button
+            android:id="@+id/sign_out_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvRegister"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="6dp"
+            android:visibility="gone"
+            android:text="Sign Out" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvRegister"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:visibility="visible" />
+
+
         <com.facebook.login.widget.LoginButton
             android:id="@+id/fb_login_btn"
             android:layout_alignParentRight="true"

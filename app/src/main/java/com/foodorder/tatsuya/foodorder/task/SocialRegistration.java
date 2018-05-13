@@ -16,17 +16,17 @@ import org.ksoap2.transport.HttpTransportSE;
  * Created by tatsuya on 20/04/2018.
  */
 
-public class FacebookRegistration extends BasicTask<Void, Void, Boolean> {
+public class SocialRegistration extends BasicTask<Void, Void, Boolean> {
     private Person person;
     private String email;
 
-    public FacebookRegistration(Context context, OnTaskCompleted<Boolean> listener,
-                                Person person, String email) {
+    public SocialRegistration(Context context, OnTaskCompleted<Boolean> listener,
+                              Person person, String email) {
         super(context, listener);
         this.person = person;
         this.email = email;
         super.URL = super.HOST_NAME + "/customerws/customerws?WSDL";
-        super.METHOD_NAME = "addFBCustomer";
+        super.METHOD_NAME = "addSocialCustomer";
         super.SOAP_ACTION = super.NAMESPACE + super.METHOD_NAME;
     }
 
@@ -49,12 +49,12 @@ public class FacebookRegistration extends BasicTask<Void, Void, Boolean> {
             emailProp.setType(String.class);//Define the type of the variable
             request.addProperty(emailProp);//Pass properties to the variable
 
-            //Pass value for fname variable of the web service
-            PropertyInfo typeProp = new PropertyInfo();
-            typeProp.setName("type");//Define the variable name in the web service method
-            typeProp.setValue("FB");//Define value for fname variable
-            typeProp.setType(String.class);//Define the type of the variable
-            request.addProperty(typeProp);//Pass properties to the variable
+//            //Pass value for fname variable of the web service
+//            PropertyInfo typeProp = new PropertyInfo();
+//            typeProp.setName("type");//Define the variable name in the web service method
+//            typeProp.setValue("FB");//Define value for fname variable
+//            typeProp.setType(String.class);//Define the type of the variable
+//            request.addProperty(typeProp);//Pass properties to the variable
 
 
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
